@@ -1,31 +1,67 @@
+// Series Loop - Stores Questions / Answers
 var series = [
 	{
-		question: "What lives on your eyelashes?",
-		answer: ['Mites', 'Tralfamadorians', 'Water Bears', 'Lice'],
-		class: [1,2,3,4],
+		question: "In Aladdin, what is the name of Jasmine's pet tiger?",
+		answer: ['Rajah', 'Tralfamador', 'Water Bear', 'Abu'],
 		correct: 0
 	},
 	{
-		question: "Only what percent of your cells are human?",
-		answer: ["75", "5", "2", "10"],
-		class: [1,2,3,4],
+		question: "In Peter Pan, Captain Hook had a hook on which one of his hands?",
+		answer: ["His Right", "His Left", "None"],
+		correct: 1	
+	},
+	{
+		question: "What is now considered the fastest ride in Walt Disney World?",
+		answer: ["Space Mountain", "Test Track", "Indiana Jones", "Big Thunder Mountain"],
+		correct: 1	
+	},
+	{
+		question: "In the Lion King, where does Mufasa and his family live?",
+		answer: ["The Ghetto", "Neverland", "The Grotto", "Pride Rock"],
 		correct: 3	
 	},
 	{
-		question: "On average, how much mucus does the human body produce?",
-		answer: ["500 Milliliters", "2 Liters", "1 Liter", "250 Milliliters"],
-		class: [1,2,3,4],
+		question: "In Dumbo, where is Mrs. Jumbo when the stork delivers her baby?",
+		answer: ["The gym", "The circus", "The train", "Jail"],
+		correct: 2
+	},
+	{
+		question: "In Beauty and the Beast, how many eggs does Gaston eat for breakfast every day?",
+		answer: ['5 dozen', 'Just one', '2 with ham', 'Green Eggs and Ham'],
+		correct: 0
+	},
+	{
+		question: "During the battle with Aladdin, what type of animal does Jafar transform himself into?",
+		answer: ["Hamster", "Cobra", "Rabbit", "Giant Lizard"],
 		correct: 1	
+	},
+	{
+		question: "After being on earth, where did Hercules first meet his father Zeus?",
+		answer: ["Mount Olympus", "Greece", "His House", "Temple of Zeus"],
+		correct: 3	
+	},
+	{
+		question: "In Toy Story, what game does the slinky play?",
+		answer: ["Parchese", "Checkers", "Chess", "Etch-a-Sketch"],
+		correct: 1	
+	},
+	{
+		question: "What was the first roller coaster attraction at Walt Disney World?",
+		answer: ["Alice in Wonderland Adventures", "Splash Mountain", "Space Mountain", "Big Thunder Mountain"],
+		correct: 2	
 	}
 ];
 
+// Globals
 var score = 0;
 var wrongScore = 0;
 var e = 0;
 var timeLeft = 30;
+var randomNum = 0;
 
+// Initial Start Screen
 $('.click-start').click(function() {
-	$('.click-start').hide();
+	$('.start').hide();
 	game();
 });
 
@@ -43,12 +79,37 @@ function game() {
 			clearInterval(timer);
 			wrong();
 		}
+	};
+
+	// Random Number Generator
+	function generateRandomNum() {
+		randomNum = Math.floor(Math.random() * 5) + 1;
+		return randomNum;
 	}
+
+	// Outcomes
+	function winScreen() {
+		$('.trivia-game, .question, .timer').empty();
+		generateRandomNum();
+		$('.trivia-game').html('<h2>Correct!</h2>' +
+			'<img src="assets/img/winner-' + randomNum + '.gif">');
+		setTimeout(game, 2500);
+	};
+
+	function loseScreen() {
+		$('.trivia-game, .question, .timer').empty();
+		generateRandomNum();
+		$('.trivia-game').html('<h2>Wrong!</h2>' +
+			'<img src="assets/img/loser-' + randomNum + '.gif">' + 
+			'<h2>Correct Answer:' + series[e-1].answer[series[e].correct] + '</h2>');
+		setTimeout(game, 2500);
+	};
 
 	// Series Loop - Loops Through Questions and Answers
 	function seriesLoop() {
-		// Show Question
+		// Show Question and Clear
 		$('.question').html("<h1>" + series[e].question + "</h1>");
+		$('.trivia-game').empty();
 
 		// Populates Answers
 		for (var i = 0; i < series[e].answer.length; i++) {
@@ -64,11 +125,19 @@ function game() {
 
 	// Re-Usable Game Over
 	function gameOver() {
-		$('.trivia-game, .question').empty();
+		$('.trivia-game, .question, .timer').empty();
 		$('.trivia-game').html('<h2>Game Over!</h2>' + 
 			"<h2> Your Score: " + score + "</h2>" +
 			'<h2>Your Wrong Answers: ' + wrongScore + '</h2>');
-	}
+		$('.timer').html('<button id="play-again">Play Again!</button>');
+		$('#play-again').click(function () {
+			$('.trivia-game, .timer').empty();
+			e = 0;
+			score = 0;
+			wrongScore = 0;
+			game();
+		});
+	};
 
 	function wrong() {
 		console.log("Wrong!");
@@ -78,7 +147,7 @@ function game() {
 		$('.trivia-game').empty();
 		e++;
 		if (e < series.length) {
-			game();
+			loseScreen();
 		} else {
 			gameOver();
 		}
@@ -92,7 +161,7 @@ function game() {
 		$('.trivia-game').empty();
 		e++;
 		if (e < series.length) {
-			game();
+			winScreen();
 		} else {
 			gameOver();
 		}
@@ -108,5 +177,7 @@ function game() {
 			wrong();
 		}
 	});
-
 };
+
+// To Do
+// Fix so that it increments within Lose and Win Functions. Find a way for it to not break on the final question.

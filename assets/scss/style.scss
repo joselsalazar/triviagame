@@ -1,10 +1,71 @@
+/*===================================
+	IMPORTS
+===================================*/
+
+@import 'reset';
+
+/*=================================
+	STYLING
+=================================*/
+body {
+	background: url('../img/disney.jpg') top repeat;
+	color: #fff;
+	font-family: 'Mouse Memoirs', sans-serif;
+	letter-spacing: 2px;
+	text-shadow: 1px 1px 3px #000;
+}
+
+header {
+	text-align: center;
+	background: #000;
+	padding: 30px 0;
+	margin-bottom: 5%;
+
+	h1 {
+		font-size: 4em;
+	}
+}
+
+h1 {
+	font-size: 3em;
+}
+
+h2 {
+	font-size: 2em;
+}
+
 main {
 	width: 65%;
 	margin: 0 auto;
-
+	text-align: center;
 	.start {
-		text-align: center;
+		
 	}
+}
+
+button {
+	padding: 10px;
+	background-color: blue;
+	border: none;
+	color: #fff;
+	font-weight: bold;
+	font-family: 'Mouse Memoirs', sans-serif;
+	letter-spacing: 2px;
+	font-size: 3em;
+	text-shadow: 1px 1px 3px #000;
+
+	#play-again {
+		font-size: 2em;
+		margin-top: 20px;
+	}
+}
+
+.start {
+	padding-top: 10%;
+}
+
+.timer {
+	font-size: 2.2em;
 }
 
 .hide-me {
@@ -14,5 +75,6 @@ main {
 .trivia-game {
 	button {
 		display: block;
+		margin: 10px auto 10px;
 	}
 }

@@ -77,7 +77,7 @@ function game() {
 			timeLeft--;
 		} else {
 			clearInterval(timer);
-			wrong();
+			loseScreen();
 		}
 	};
 
@@ -88,21 +88,37 @@ function game() {
 	}
 
 	// Outcomes
-	function winScreen() {
+	function resetScreen() {
+		clearInterval(timer);
+		timeLeft = 30;
 		$('.trivia-game, .question, .timer').empty();
 		generateRandomNum();
+	}
+
+	function eCheck() {
+		e++;
+		if (e < series.length) {
+			setTimeout(game, 2500);
+		} else {
+			setTimeout(gameOver, 2500);
+		}
+	}
+
+	function winScreen() {
+		score++;
+		resetScreen();
 		$('.trivia-game').html('<h2>Correct!</h2>' +
 			'<img src="assets/img/winner-' + randomNum + '.gif">');
-		setTimeout(game, 2500);
+		eCheck();
 	};
 
 	function loseScreen() {
-		$('.trivia-game, .question, .timer').empty();
-		generateRandomNum();
+		wrongScore++;
+		resetScreen();
 		$('.trivia-game').html('<h2>Wrong!</h2>' +
 			'<img src="assets/img/loser-' + randomNum + '.gif">' + 
-			'<h2>Correct Answer:' + series[e-1].answer[series[e].correct] + '</h2>');
-		setTimeout(game, 2500);
+			'<h2>Correct Answer:' + series[e].answer[series[e].correct] + '</h2>');
+		eCheck();
 	};
 
 	// Series Loop - Loops Through Questions and Answers
@@ -139,45 +155,14 @@ function game() {
 		});
 	};
 
-	function wrong() {
-		console.log("Wrong!");
-		clearInterval(timer);
-		timeLeft = 30;
-		wrongScore++;
-		$('.trivia-game').empty();
-		e++;
-		if (e < series.length) {
-			loseScreen();
-		} else {
-			gameOver();
-		}
-	}
-
-	function right() {
-		console.log("Correct!");
-		clearInterval(timer);
-		timeLeft = 30;
-		score++;
-		$('.trivia-game').empty();
-		e++;
-		if (e < series.length) {
-			winScreen();
-		} else {
-			gameOver();
-		}
-	}
-
 	// Checks Selected Button
 	$('button').click(function() {
 		// Correct Condition
 		if ($(this).hasClass('correct')) {
-			right();
+			winScreen();
 		// Wrong Condition
 		} else {
-			wrong();
+			loseScreen();
 		}
 	});
 };
-
-// To Do
-// Fix so that it increments within Lose and Win Functions. Find a way for it to not break on the final question.

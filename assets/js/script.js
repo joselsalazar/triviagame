@@ -72,8 +72,11 @@ function game() {
 	var timer = setInterval(thirtySeconds, 1000);
 
 	function thirtySeconds() {
-		if (timeLeft > 0) {
+		if (timeLeft > 10) {
 			$('.timer').html(timeLeft + " seconds remaining!");
+			timeLeft--;
+		} else if (timeLeft > 0) {
+			$('.timer').addClass('red').html(timeLeft + " seconds remaining!");
 			timeLeft--;
 		} else {
 			clearInterval(timer);
@@ -92,6 +95,7 @@ function game() {
 		clearInterval(timer);
 		timeLeft = 30;
 		$('.trivia-game, .question, .timer').empty();
+		$('.timer').removeClass('red');
 		generateRandomNum();
 	}
 
@@ -139,12 +143,21 @@ function game() {
 
 	seriesLoop();
 
+	function rankPlayer() {
+		if (score >= 9) {
+			$('.trivia-game').append('<h2>Your Rank:</h2><br><h3>Sorcerer Mickey! You are the nerdiest of Disney Nerds!</h3><img src="assets/img/sorcerer-mickey.png">');
+		} else if (score >= 7) {
+			$('.trivia-game').append('<h2>Your Rank:</h2><br><h3>Woody! You are pretty savvy with Disney Trivia!</h3><img src="assets/img/woody.png">');
+		}
+	}
+
 	// Re-Usable Game Over
 	function gameOver() {
 		$('.trivia-game, .question, .timer').empty();
 		$('.trivia-game').html('<h2>Game Over!</h2>' + 
 			"<h2> Your Score: " + score + "</h2>" +
 			'<h2>Your Wrong Answers: ' + wrongScore + '</h2>');
+		rankPlayer();
 		$('.timer').html('<button id="play-again">Play Again!</button>');
 		$('#play-again').click(function () {
 			$('.trivia-game, .timer').empty();

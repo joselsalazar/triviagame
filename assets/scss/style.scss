@@ -8,19 +8,18 @@
 	STYLING
 =================================*/
 body {
-	background: url('../img/disney.jpg') top repeat;
+	background: url('../img/mickey-bg.jpg') top;
 	color: #fff;
 	font-family: 'Mouse Memoirs', sans-serif;
 	letter-spacing: 2px;
-	text-shadow: 1px 1px 3px #000;
+	text-shadow: 1px 1px 5px #000;
 }
 
 header {
 	text-align: center;
 	background: #000;
 	padding: 30px 0;
-	margin-bottom: 5%;
-
+	position: relative;
 	h1 {
 		font-size: 4em;
 	}
@@ -35,17 +34,17 @@ h2 {
 }
 
 main {
+	background: url('../img/disney.jpg') top no-repeat;
 	width: 65%;
 	margin: 0 auto;
 	text-align: center;
-	.start {
-		
-	}
+	min-height: 600px;
+	padding-top: 50px;
 }
 
 button {
-	padding: 10px;
-	background-color: blue;
+	padding: 10px 15px;
+	background-color: #8BABDB;
 	border: none;
 	color: #fff;
 	font-weight: bold;
@@ -54,11 +53,26 @@ button {
 	font-size: 3em;
 	text-shadow: 1px 1px 3px #000;
 	cursor: pointer;
+}
 
-	#play-again {
-		font-size: 2em;
-		margin-top: 20px;
-	}
+#play-again {
+	font-size: 1.8em;
+	margin-top: 40px;
+}
+
+.img-fit {
+	width: 150px;
+	position: absolute;
+}
+
+.left {
+	left: 5%;
+	top: 30px;
+}
+
+.right {
+	right: 5%;
+	top: 34px;
 }
 
 .start {
@@ -67,15 +81,37 @@ button {
 
 .timer {
 	font-size: 2.2em;
+	padding-bottom: 30px;
 }
 
 .hide-me {
 	display: none;
 }
 
+.red {
+	color: red;
+	font-size: 2.35em;
+}
+
 .trivia-game {
+	margin: 20px 0;
 	button {
 		display: block;
 		margin: 10px auto 10px;
+	}
+
+	h2 {
+		font-size: 4em;
+		margin: 20px 0;
+	}
+
+	h3 {
+		font-size: 3em;
+	}
+}
+
+.question {
+	h1 {
+		font-size: 3.5em;
 	}
 }

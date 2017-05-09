@@ -145,11 +145,19 @@ function game() {
 
 	function rankPlayer() {
 		if (score >= 9) {
-			$('.trivia-game').append('<h2>Your Rank:</h2><br><h3>Sorcerer Mickey! You are the nerdiest of Disney Nerds!</h3><img src="assets/img/sorcerer-mickey.png">');
+			$('.trivia-game').append('<h2>Your Rank:</h2><br><h3>Sorcerer Mickey! You are the nerdiest of Disney Nerds! Go back to your nerd cave!</h3><img src="assets/img/sorcerer-mickey.png">');
 		} else if (score >= 7) {
-			$('.trivia-game').append('<h2>Your Rank:</h2><br><h3>Woody! You are pretty savvy with Disney Trivia!</h3><img src="assets/img/woody.png">');
+			$('.trivia-game').append('<h2>Your Rank:</h2><br><h3>Woody! You are pretty savvy with Disney Trivia, but you missed a few so you ain\'t so hot.</h3><img src="assets/img/woody.png">');
+		} else if (score >= 5) {
+			$('.trivia-game').append('<h2>Your Rank:</h2><br><h3>Pinocchio! You really don\'t know that much, but you lie about it well!</h3><img src="assets/img/pinocchio.png">');
+		} else if (score >= 3) {
+			$('.trivia-game').append('<h2>Your Rank:</h2><br><h3>Donald Duck! You mean well, but no one can understand you so you get everything wrong.</h3><img src="assets/img/donald-duck.png">');
+		} else if (score >= 1) {
+			$('.trivia-game').append('<h2>Your Rank:</h2><br><h3>Ariel! You are a very beautiful person. But you use a fork for a brush so you\'re pretty dumb at this point.</h3><img src="assets/img/ariel.png">');
+		} else {
+			$('.trivia-game').append('<h2>Your Rank:</h2><br><h3>Dopey! You got all of them wrong. You\'re either really stupid, or just hate Disney.</h3><img src="assets/img/dopey.png">');
 		}
-	}
+	}	
 
 	// Re-Usable Game Over
 	function gameOver() {
